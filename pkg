@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+com=$1
+app=$2
+
+function update {
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+else
+pacman -Suy
+fi
+}
+
+function updateall {
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+else
+yes | pacman -Suy
+fi
+}
+
+function install {
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+else
+pacman -Sy $app
+fi
+}
+
+function build {
+
+makepkg --syncdeps
+sudo pacman -U *.xz
+}
+
+function remove {
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+else
+pacman -Rsu $app
+fi
+}
+
+function query {
+	if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+else
+	pacman -Fy
+	pacman -F $app
+fi
+}
+if [ "$com" == update ]
+then
+	update
+
+elif [ "$com" == install ]
+then
+	install
+
+elif [ "$com" == remove ]
+then
+	remove
+
+elif [ "$com" == query ]
+then
+	query
+
+elif [ "$com" == build ]
+then
+	build
+else
+	echo "Please provide one of the following update,build,install,query or remove"
+fi
