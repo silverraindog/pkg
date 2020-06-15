@@ -53,9 +53,24 @@ else
 	pacman -F $app
 fi
 }
+
+function help {
+ echo "Package to automate install, update and remove packages from Arch System"
+ echo "update: Updates system without automatic yes"
+ echo "updateall: Updates system with automatic yes"
+ echo "install: Installs package from pacman"
+ echo "remove: removes package from pacman"
+ echo "query: Queries pacman for package"
+ echo "build: Builds package from AUR and installs pacakge"
+  
+}
 if [ "$com" == update ]
 then
 	update
+
+elif [ "$com" == updateall ]
+then
+	updateall
 
 elif [ "$com" == install ]
 then
@@ -73,5 +88,5 @@ elif [ "$com" == build ]
 then
 	build
 else
-	echo "Please provide one of the following update,build,install,query or remove"
+	echo "Please provide one of the following updateall,update,build,install,query or remove"
 fi
