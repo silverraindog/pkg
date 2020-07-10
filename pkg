@@ -80,6 +80,12 @@ elif [ "$com" == remove ]
 then
 	remove
 
+
+	
+elif [ "$com" == search ]
+then
+	query
+	
 elif [ "$com" == query ]
 then
 	query
